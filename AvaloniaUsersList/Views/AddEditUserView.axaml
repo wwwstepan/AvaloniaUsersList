@@ -1,0 +1,66 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AvaloniaUsersList.Views.AddEditUserView"
+        xmlns:vm="using:AvaloniaUsersList.ViewModels"
+        x:DataType="vm:AddEditUserViewModel"
+        Width="500" Height="350" MinWidth="500" MinHeight="350"
+		SizeToContent="WidthAndHeight"
+		WindowStartupLocation="CenterScreen"
+        Title="{Binding Title}"
+>
+	<Window.Styles>
+		<Style Selector="TextBox">
+			<Setter Property="Margin" Value="10"/>
+			<Setter Property="MaxHeight" Value="16"/>
+			<Setter Property="MinWidth" Value="140"/>
+			<Setter Property="MaxWidth" Value="250"/>
+		</Style>
+		<Style Selector="Label">
+			<Setter Property="Margin" Value="10"/>
+		</Style>
+	</Window.Styles>
+
+	<Grid RowDefinitions="*,Auto">
+		<Grid RowDefinitions="Auto,Auto,Auto,Auto" 
+			  ColumnDefinitions="Auto,Auto,Auto,Auto"
+			  Margin="10"
+		>		
+			<Label Grid.Row="0" Content="Имя" />
+			<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Model.FirstName}" MaxLength="50" />
+
+			<Label Grid.Row="0" Grid.Column="2" Content="Фамилия" />
+			<TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Model.LastName}" MaxLength="50" />
+		
+			<Label Grid.Row="1" Content="Логин" />
+			<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Model.Login}" MaxLength="20" />
+
+			<Label Grid.Row="1" Grid.Column="2" Content="Пароль" />
+			<TextBox Grid.Row="1" Grid.Column="3" Text="{Binding Model.Password}" MaxLength="20"
+					 PasswordChar="*" />
+
+			<Label Grid.Row="2" Content="Эл. почта" />
+			<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Model.Email}" MaxLength="50" />
+
+			<Label Grid.Row="2" Grid.Column="2" Content="Уровень доступа" />
+			<ComboBox Grid.Row="2" Grid.Column="3" Margin="10" MinWidth="140"
+					  ItemsSource="{Binding AccessLevels}" 
+					  SelectedItem="{Binding Model.AccessLevel}" />
+		
+			<Label Grid.Row="3" Content="Заметки" />
+			<TextBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3"
+					 Text="{Binding Model.Notes}" AcceptsReturn="True"
+					 MinWidth="400" MaxWidth="550" MaxHeight="150" 
+					 HorizontalAlignment="Left" />
+
+		</Grid>
+		
+		<StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+			<Button Content="Записать изменения" Command="{Binding SaveCommand}" />
+			<Button Content="Отмена" Command="{Binding CancelCommand}" />
+		</StackPanel>
+		
+	</Grid>
+</Window>
